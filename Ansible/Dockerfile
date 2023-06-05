@@ -1,11 +1,8 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && \
-  apt-get install -y gcc python-dev libkrb5-dev && \
-  apt-get install python3-pip -y && \
-  pip3 install --upgrade pip && \
-  pip3 install --upgrade virtualenv && \
-  pip3 install pywinrm[kerberos] && \
-  apt install krb5-user -y && \ 
-  pip3 install pywinrm && \
-  pip3 install ansible
+RUN apt-get update
+RUN apt-get install gcc python-dev libkrb5-dev -y
+RUN apt-get install python3-pip -y 
+RUN apt install krb5-user -y
+RUN pip3 install pywinrm 
+RUN pip3 install ansible
