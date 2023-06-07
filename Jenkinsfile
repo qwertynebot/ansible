@@ -15,14 +15,16 @@ pipeline  {
         stage("Git clone") {
             steps {
                 sh '''
-                git clone https://github.com/qwertynebot/ansible     
+                cd /home/an/
+                git clone https://github.com/qwertynebot/ansible        
                 '''
             }
         }    
         stage("Build") {
             steps {
                 sh '''
-                docker build -t darkne24/ansiblee .
+                cd /home/an/ansible.jen/Ansible
+                docker build -t darkne24/ansible .
                 '''
             }
         } 
@@ -31,7 +33,7 @@ pipeline  {
                 sh '''
                 docker run \
                 --name ansible \
-                -d darkne24/ansiblee
+                -d darkne24/ansible
                 '''
             }
         }
@@ -49,7 +51,7 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push darkne24/ansiblee
+                docker push darkne24/ansible
                 '''
             }
         }
