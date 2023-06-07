@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone repository') {
             steps {
-                git branch: 'master', url: 'https://github.com/qwertynebot/ansible.git'
+                git clone https://github.com/qwertynebot/ansible.jen   
             }
         }
         
