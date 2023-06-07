@@ -16,7 +16,7 @@ pipeline  {
             steps {
                 sh '''
                 cd /home/an/
-                git clone https://github.com/Makson8286/ansible.jen         
+                git clone https://github.com/qwertynebot/ansible.jen         
                 '''
             }
         }    
@@ -24,7 +24,7 @@ pipeline  {
             steps {
                 sh '''
                 cd /home/an/ansible.jen/Ansible
-                docker build -t makson8286/ansible .
+                docker build -t darkne24/ansible .
                 '''
             }
         } 
@@ -33,7 +33,7 @@ pipeline  {
                 sh '''
                 docker run \
                 --name ansible \
-                -d makson8286/ansible
+                -d darkne24/ansible
                 '''
             }
         }
@@ -51,7 +51,7 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push makson8286/ansible
+                docker push darkne24/ansible
                 '''
             }
         }
