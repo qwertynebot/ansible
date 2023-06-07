@@ -22,7 +22,7 @@ pipeline  {
         stage("Build") {
             steps {
                 sh '''
-                docker build -t darkne24/ansible .
+                docker build -t darkne24/ansiblee .
                 '''
             }
         } 
@@ -31,7 +31,7 @@ pipeline  {
                 sh '''
                 docker run \
                 --name ansible \
-                -d darkne24/ansible
+                -d darkne24/ansiblee
                 '''
             }
         }
@@ -49,7 +49,7 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push darkne24/ansible
+                docker push darkne24/ansiblee
                 '''
             }
         }
