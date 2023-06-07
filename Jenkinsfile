@@ -15,7 +15,7 @@ pipeline  {
         stage("Git clone") {
             steps {
                 sh '''
-                git clone https://github.com/qwertynebot/ansibleee     
+                git clone https://github.com/qwertynebot/ansiblee
                 '''
             }
         }    
