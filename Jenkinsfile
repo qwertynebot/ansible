@@ -23,7 +23,7 @@ pipeline  {
         stage("Build") {
             steps {
                 sh '''
-                cd /var/lib/jenkins/workspace/ansible/ansibl
+                cd /var/lib/jenkins/workspace/ansible/ansibl/ansible
                 docker build -t darkne24/ansible .
                 '''
             }
