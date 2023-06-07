@@ -16,7 +16,7 @@ pipeline  {
             steps {
                 sh '''
                 cd /home/master
-                git clone https://github.com/qwertynebot/ansiblee
+                git clone https://github.com/qwertynebot/ansibl
                 '''
             }
         }    
