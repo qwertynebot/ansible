@@ -15,7 +15,6 @@ pipeline  {
         stage("Git clone") {
             steps {
                 sh '''
-                cd /home/master/an
                 git clone https://github.com/qwertynebot/ansible        
                 '''
             }
@@ -23,7 +22,6 @@ pipeline  {
         stage("Build") {
             steps {
                 sh '''
-                cd /home/master/an/ansible/Ansible
                 docker build -t darkne24/ansible .
                 '''
             }
