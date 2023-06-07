@@ -1,31 +1,58 @@
-pipeline {
-    agent any
-    
+#!groovy
+//  groovy Jenkinsfile
+properties([disableConcurrentBuilds()])\
+
+pipeline  {
+        agent { 
+           label ''
+        }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
     stages {
-        stage('Clone repository') {
+        stage("Git clone") {
             steps {
-                git clone https://github.com/qwertynebot/ansible.jen   
+                sh '''
+                cd /home/an/
+                git clone https://github.com/Makson8286/ansible     
+                '''
+            }
+        }    
+        stage("Build") {
+            steps {
+                sh '''
+                cd /home/an/ansible.jen/Ansible
+                docker build -t darkne24/ansible .
+                '''
+            }
+        } 
+        stage("Postgres") {
+            steps {
+                sh '''
+                docker run \
+                --name ansible \
+                -d darkne24/ansible
+                '''
             }
         }
-        
-        stage('Install Ansible') {
+        stage("docker login") {
             steps {
-                sh 'pip install ansible'
-            }
-        }
-        
-        stage('Build Docker image') {
-            steps {
-                sh 'docker build -t darkne24/my-ansible .'
-            }
-        }
-        
-        stage('Push to Docker registry') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
-                    sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                    sh 'docker push darkne24/my-ansible'
+                echo " ============== docker login =================="
+                withCredentials([usernamePassword(credentialsId: 'DockerHub-Credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh '''
+                    docker login -u $USERNAME -p $PASSWORD
+                    '''
                 }
+            }
+        }
+        stage("docker push") {
+            steps {
+                echo " ============== pushing image =================="
+                sh '''
+                docker push darkne24/ansible
+                '''
             }
         }
     }
