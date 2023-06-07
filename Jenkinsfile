@@ -16,7 +16,7 @@ pipeline  {
             steps {
                 sh '''
                 cd /var/lib/jenkins/workspace/ansible
-                git clone https://github.com/qwertynebot/ansibl
+                git clone https://github.com/qwertynebot/ansible.j
                 '''
             }
         }    
